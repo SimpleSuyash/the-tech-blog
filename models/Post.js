@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
-const {titleize, capitalize} = require("../helper/textFormatter.js")
+const {titleize, capitalize} = require("../helper/textFormatter.js");
+const dayjs = require("dayjs");
 
 class Post extends Model { }
 
@@ -36,10 +37,10 @@ Post.init(
                 }
             }
         },
-        created_at:{
+        post_date:{
             type: DataTypes.DATEONLY,
             allowNull: false,
-            defaultValue: Date.now(),
+            defaultValue: dayjs().format("YYYY/MM/DD"),
             validate: {
                 notNull: {
                     msg: "Post created date is required!"
@@ -49,8 +50,9 @@ Post.init(
                 }
             }
         },
-        last_updated_at:{
+        last_update_date:{
             type: DataTypes.DATEONLY,
+            defaultValue: null
         },
         creater_id: {
             type: DataTypes.INTEGER,
