@@ -38,7 +38,7 @@ User.init(
                     msg: "Please provide Email!"
                 },
                 isEmail: {
-                    "Please provide valid Email id!"
+                    msg: "Please provide valid Email id!"
                 }
             }
         },
