@@ -13,7 +13,7 @@ Post.init(
             allowNull: false
         },
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(35),
             allowNull: false,
             validate: {
                 notNull: {
@@ -25,7 +25,7 @@ Post.init(
             }
         },
         content: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: {
