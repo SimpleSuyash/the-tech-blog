@@ -24,6 +24,9 @@ User.init(
                 notEmpty: {
                     msg: "Please provide Username!"
                 },
+                isAlphanumeric :{
+                    msg: "Only alpha numeric value is allowed."
+                }
             }
         },
         email: {
@@ -66,33 +69,27 @@ User.init(
             beforeCreate: async (newUserData) => {
                 // In this case, we are taking the user's email address, and making all letters lower case before adding it to the database.
                 newUserData.email = await newUserData.email.toLowerCase();
+                //username first letter capitalizing
+                newUserData.username = await capitalize(newUserData.username);
+                //storing password in hashed format
+                newUserData.password = await bcrypt.hash(newUserData.password, 7);
+
             return newUserData;
             },
+            /*
             // Here, we use the beforeUpdate hook to make all of the characters lower case in an updated email address, before updating the database.
             beforeUpdate: async (updatedUserData) => {
                 updatedUserData.email = await updatedUserData.email.toLowerCase();
-            return updatedUserData;
-            },
-
-            //username first letter capitalizing
-            beforeCreate: async (newUserData) =>{
-                newUserData.username = await capitalize(newUserData.username);
-            },
-            beforeUpdate: async (updatedUserData) =>{
                 updatedUserData.username = await capitalize(updatedUserData.username);
-            },
-
-            //storing password in hashed format
-            beforeCreate: async (newUserData) => {
-                newUserData.password = await bcrypt.hash(newUserData.password, 7);
-                return newUserData;
-            },
-            beforeUpdate: async (updatedUserData) => {
                 if (updatedUserData.password) {
                     updatedUserData.password = await bcrypt.hash(updatedUserData.password, 7);
                 }
                 return updatedUserData;
+
+            return updatedUserData;
             },
+
+            */
         },
         sequelize,
         timestamps: false,
