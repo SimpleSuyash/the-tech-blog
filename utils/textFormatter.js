@@ -2,10 +2,10 @@
 const titleize = (title) => {
     let words = title.split(" ");
     words = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
-    return words.join("");
+    return words.join(" ");
 };
 
 //capitalize the first letter of the given text
-const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1);
 
 module.exports = {titleize, capitalize};

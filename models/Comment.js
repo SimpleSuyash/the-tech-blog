@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 const dayjs = require("dayjs");
 
 class Comment extends Model { }
@@ -28,7 +28,7 @@ Comment.init(
         comment_date:{
             type: DataTypes.DATEONLY,
             allowNull: false,
-            defaultValue:  dayjs().format("YYYY/MM/DD"),
+            defaultValue:  dayjs().format("YYYY-MM-DD"),
             validate: {
                 notNull: {
                     msg: "Comment created date is required!"

@@ -1,9 +1,13 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
-const { capitalize } = require('../helper/textFormatter.js');
+const sequelize = require("../config/connection.js");
+const { capitalize } = require("../utils/textFormatter.js");
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
 
-class User extends Model { }
+class User extends Model { 
+
+}
 
 User.init(
     {
@@ -67,29 +71,16 @@ User.init(
         hooks: {
             // Use the beforeCreate hook to work with data before a new instance is created
             beforeCreate: async (newUserData) => {
-                // In this case, we are taking the user's email address, and making all letters lower case before adding it to the database.
-                newUserData.email = await newUserData.email.toLowerCase();
+jhnjjj;
                 //username first letter capitalizing
                 newUserData.username = await capitalize(newUserData.username);
+                // In this case, we are taking the user's email address, and making all letters lower case before adding it to the database.
+                newUserData.email = await newUserData.email.toLowerCase();
                 //storing password in hashed format
-                newUserData.password = await bcrypt.hash(newUserData.password, 7);
+                newUserData.password = await bcrypt.hash(newUserData.password, saltRounds);
 
-            return newUserData;
+                return newUserData;
             },
-            /*
-            // Here, we use the beforeUpdate hook to make all of the characters lower case in an updated email address, before updating the database.
-            beforeUpdate: async (updatedUserData) => {
-                updatedUserData.email = await updatedUserData.email.toLowerCase();
-                updatedUserData.username = await capitalize(updatedUserData.username);
-                if (updatedUserData.password) {
-                    updatedUserData.password = await bcrypt.hash(updatedUserData.password, 7);
-                }
-                return updatedUserData;
-
-            return updatedUserData;
-            },
-
-            */
         },
         sequelize,
         timestamps: false,
