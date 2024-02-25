@@ -1,19 +1,19 @@
 const router = require('express').Router();
 const {Post, User, Comment} = require('../models');
+// Import the custom middleware
+const withAuth = require('../utils/auth');
 
 //route to get all posts
 router.get("/", async (req, res)=>{
     try {
-        const postData  = await Post.findAll({
-            include:[ 
-                {
-                    model: User,
-                    attributes: ["username"]
-                }
-            ]
-        });
+        const postData  = await Post.findAll();
+       
         const posts = postData.map(post => post.get({plain: true}));
-        res.render("homepage");
+        res.render("homepage",{
+                posts,
+                title: "Home"
+            }
+        );
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
