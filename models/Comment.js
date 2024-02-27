@@ -17,12 +17,8 @@ Comment.init(
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
-                notNull: {
-                    msg: "Comment content is required!"
-                },
-                notEmpty: {
-                    msg: "Please provide Comment content!"
-                }
+                notNull: true,
+                notEmpty: true
             }
         },
         comment_date:{
@@ -30,12 +26,8 @@ Comment.init(
             allowNull: false,
             defaultValue:  dayjs().format("YYYY-MM-DD"),
             validate: {
-                notNull: {
-                    msg: "Comment created date is required!"
-                },
-                notEmpty: {
-                    msg: "Please provide Comment creation date!"
-                }
+                notNull: true,
+                notEmpty: true
             }
         },
         post_id: {
