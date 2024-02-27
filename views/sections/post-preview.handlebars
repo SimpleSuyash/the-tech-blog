@@ -4,16 +4,16 @@
     </figure>
     <div class="card-body">
         <div class="flex justify-between">
-            <h2 class="card-title text-accent">{{title}}</h2>
-            <div class=" badge badge-accent">Posted On: {{formatDate post_date }} </div>
+            <h2 class="card-title text-accent">{{ title }}</h2>
+            <div class=" badge badge-accent">Posted On: {{ formatDate post_date }} </div>
         </div>
         
-        <div class="  line-clamp-3 prose prose-stone md:prose-lg lg:prose-xl">
-            {{{content}}}
+        <div class=" line-clamp-3 prose prose-stone md:prose-lg lg:prose-xl">
+            {{{ content }}}
         </div>
 
         <div class="card-actions justify-end">
-            <button class="btn btn-accent text-accent-content " data-id="">Read Full Article</button>
+            <button class="btn btn-accent text-accent-content " data-id={{ id }}>Read Full Article</button>
         </div>
     </div>
 </article>

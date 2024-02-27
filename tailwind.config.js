@@ -2,7 +2,7 @@
 module.exports = {
   // content: ["./src/**/*.{html,js}"],
   // content: ["./src/**/*.{handlebars,js}"],
-  content: ["./src/**/*.js", "./**/*.webpage"],
+  content: ["./src/**/*.js", "./**/*.handlebars"],
   theme: {
     extend: {
       gridTemplateColumns: {

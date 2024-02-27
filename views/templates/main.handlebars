@@ -14,15 +14,17 @@
 <body class="font-content text-xl">
 
     {{> header}}
-     
-    <main class="home md:grid md:grid-cols-auto-fill md: gap-4 my-4 mb-24">
-
-        {{{body}}}
-
-    </main>
+    
+    <div class= "my-4">
+        {{{ body }}}
+    </div>
+    
 
     {{> footer}}
 
-
+    {{!-- if the user is logged in, load the logout script when they logout  --}}
+    {{#if loggedIn}}
+        <script src ="./scripts/logout.js" type="module"></script>
+    {{/if}}
 </body>
 </html>

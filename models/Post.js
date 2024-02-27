@@ -17,24 +17,16 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: {
-                    msg: "Post title is required!"
-                },
-                notEmpty: {
-                    msg: "Please provide Post title!"
-                }
+                notNull: true,
+                notEmpty: true
             }
         },
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
-                notNull: {
-                    msg: "Post content is required!"
-                },
-                notEmpty: {
-                    msg: "Please provide Post content!"
-                }
+                notNull: true,
+                notEmpty: true
             }
         },
         post_date:{
@@ -42,12 +34,8 @@ Post.init(
             allowNull: false,
             defaultValue: dayjs().format("YYYY-MM-DD"),
             validate: {
-                notNull: {
-                    msg: "Post created date is required!"
-                },
-                notEmpty: {
-                    msg: "Please provide Post creation date!"
-                }
+                notNull: true,
+                notEmpty: true
             }
         },
         last_update_date:{
@@ -68,7 +56,7 @@ Post.init(
             beforeCreate: async (newPostData) => {
                 //titleize capitalized the first letter of every word
                 newPostData.title = await titleize(newPostData.title);
-                return newUserData;
+                return newPostData;
             },
             // Here, we use the beforeUpdate hook to make all of the characters lower case in an updated email address, before updating the database.
             beforeUpdate: async (updatedPostData) => {
