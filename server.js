@@ -30,7 +30,12 @@ const sess = {
   store: new SequelizeStore({
     db: sequelize,
   }),
-  // cookie: { secure: true }
+  cookie: { 
+    // secure: true,
+    httpOnly: true,
+    sameSite: "strict",
+    maxAge: 100000
+  } 
 };
 app.use(session(sess));
 
