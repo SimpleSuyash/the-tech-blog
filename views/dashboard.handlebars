@@ -1,0 +1,20 @@
+
+<div class="">
+    <h2>Welcome, {{name}}!</h2>
+</div>
+<hr>
+<h3 clas="text-center">Your Post</h3>
+<main class="home md:grid md:grid-cols-auto-fill md: gap-4 mb-24">
+    {{#if posts.length}}
+        {{#each posts as |post|}}
+            {{> user-post-cards}}
+        {{/each}}
+    {{/if}}
+
+</main>
+
+
+<button type="button" class="btn btn-accent"> Create New Post</button>
+
+
+<script src="./scripts/dashboard.js"></script>0
