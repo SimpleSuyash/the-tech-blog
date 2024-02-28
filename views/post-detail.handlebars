@@ -5,7 +5,7 @@
     <div>
         <div class="flex justify-start gap-3 my-4">
             <h2 class=" text-accent">{{ title }}</h2>
-            <h3 class=" badge badge-accent">Posted On: {{ formatDate post_date }} By: {{ user.username }} </h3>
+            {{>post-info}}
         </div>
 
         <div class="my-4 prose  md:prose-lg lg:prose-xl  min-w-full">

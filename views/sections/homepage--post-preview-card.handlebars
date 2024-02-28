@@ -5,7 +5,7 @@
             class="max-w-sm rounded-lg shadow-2xl" />
         <div>
             <h1 class=" font-bold text-accent">{{ title }}</h1>
-            <div class=" badge badge-accent">Posted On: {{ formatDate post_date }} </div>
+            {{>post-info}}
             <div class=" line-clamp-3 prose prose-stone md:prose-lg lg:prose-xl my-8">
                 {{{ content }}}
             </div>

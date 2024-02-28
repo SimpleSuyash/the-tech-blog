@@ -4,31 +4,43 @@ $(document).ready(()=>{
     const commentTxtArea = $("#comment");
 
     const url = window.location.toString();
-    const post_id= url.charAt(url.length-1);
+    const postId= url.charAt(url.length-1);
     
-
+    //data validation is not done here
+    // if user has access to post button
+    //that means the comment value is already valid
     const postHandler = async(event) =>{
-        const content = commentTxtArea.val();
-        if(comment && $.trim(comment)!==0){
-            try{
-                const response = await fetch(`/api/comments/`,{
-                    method: "POST",
-                    body: JSON.stringify({content, post_id}),
-                    headers: {"Content-Type": "application/json"}
-                });
-                if (response.ok) {
-                    document.location.reload();
-                } else {
-                    alert('Failed to create the comment!');
-                }
-            }catch(error){
-                console.log(error);
+        const comment = $.trim(commentTxtArea.val());
+        try{
+            const response = await fetch(`/api/comments/`,{
+                method: "POST",
+                body: JSON.stringify({content:comment, post_id:postId}),
+                headers: {"Content-Type": "application/json"}
+            });
+            if (response.ok) {
+                document.location.reload();
+            } else {
+                alert('Failed to create the comment!');
             }
-        }else{
-            commentTxtArea.val("");
-            commentTxtArea.focus();
+        }catch(error){
+            console.log(error);
         }
     };
 
+
+
+    const textChangeHandler = event =>{
+        if($.trim(commentTxtArea.val())!==""){
+            postBtn.removeAttr("disabled");
+            if(event.key === "Enter"){
+                postHandler();
+            }
+        }else{
+            postBtn.attr("disabled", true);
+        }
+    };
+
+
     postBtn.on("click", postHandler);
+    commentTxtArea.on("keyup", textChangeHandler);
 });
