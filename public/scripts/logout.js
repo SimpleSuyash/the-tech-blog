@@ -1,4 +1,4 @@
-const logoutEl = document.querySelector("#logout");
+const logoutEl = $("#logout");
 
 const logoutHandler = async () => {
   const response = await fetch("/api/users/logout", {
@@ -13,4 +13,4 @@ const logoutHandler = async () => {
   }
 };
 
-logoutEl.addEventListener("click", logoutHandler);
+logoutEl.on("click", logoutHandler);

@@ -11,7 +11,7 @@ const commentData = [
         content: "Deepfake is a pandora's box. It should be immediately BANNED.",
         comment_date: "2024-02-06",
         post_id: 1,
-        commenter_id: 2
+        commenter_id: 1
     },
     {
         content: "Looking foward to Vision Pro.",
