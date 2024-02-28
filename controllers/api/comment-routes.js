@@ -3,7 +3,7 @@ const { Comment } = require("../../models");
 // Import the custom middleware
 const withAuth = require("../../utils/auth");
 
-router.post("/", async(req, res)=>{
+router.post("/", withAuth, async(req, res)=>{
     try {
         if(!req.session.loggedIn){
             res.redirect("/login");

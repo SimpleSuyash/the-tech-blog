@@ -44,46 +44,40 @@ const emailChangeHandler = (event) =>{
 
 //when email and password are valid
 //enable sign in button
-//when email, password and username are valid
-//enable sign up button
 const passwordChangeHandler = async(event) =>{
-
-    if(validatePassword(passwordEl.val())){
-        signInBtn.removeAttr("disabled");
-    }else{
-        signInBtn.attr("disabled", true);
-    }
-    if(validateUsername(usernameEl.val()) && validatePassword(passwordEl.val())){
-        signUpBtn.removeAttr("disabled");
-    }else{
-        signUpBtn.attr("disabled", true);
-    } 
-
-    if(!signInBtn.attr("disabled") && signUpBtn.attr("disabled") && event.key === "Enter"){
-        signInHandler();
+    if(signUpBtn.hasClass("hidden")){
+        if(validatePassword(passwordEl.val())){
+            signInBtn.removeAttr("disabled");
+            if(event.key === "Enter"){
+                signInHandler();
+            }
+        }else{
+            signInBtn.attr("disabled", true);
+        }
     }
 };
 
 //when email, password and username is valid
 //enable sign up button
 const usernameChangeHandler = (event) =>{
-    if(validateUsername(usernameEl.val()) && validatePassword(passwordEl.val())){
-        signUpBtn.removeAttr("disabled");
-
-        if(!signUpBtn.attr("disabled") && event.key === "Enter"){
-            signUpHandler();
+    if(signInBtn.hasClass("hidden")){
+        if(validateUsername(usernameEl.val()) && validatePassword(passwordEl.val())){
+            signUpBtn.removeAttr("disabled");
+            if( event.key === "Enter"){
+                signUpHandler();
+            }
+        }else{
+            signUpBtn.attr("disabled", true);
         }
-    }else{
-        signUpBtn.attr("disabled", true);
     }
 };
 //handles "continue" click event 
 //data validation is not done here
 //if user has access to this button, 
-//means data is already valid
+//means email data is already valid
 const continueHandler = async(event) =>{
 
-    const email = emailEl.val().trim();
+    const email = $.trim(emailEl.val());
     try{
         const response = await fetch("/api/users/login/",{
             method: "POST",
@@ -119,8 +113,8 @@ const continueHandler = async(event) =>{
 //handles sign in click event
 const signInHandler = async(event) =>{
 
-    const email = emailEl.val().trim();
-    const password = passwordEl.val().trim();
+    const email = $.trim(emailEl.val());
+    const password = $.trim(passwordEl.val());
    
     try {
         const response = await fetch("/api/users/login", {
@@ -141,9 +135,9 @@ const signInHandler = async(event) =>{
 //handles sign up click event
 const signUpHandler = async(event) =>{
 
-    const email = emailEl.val().trim();
-    const password = passwordEl.val().trim();
-    const username = usernameEl.val().trim();
+    const email = $.trim(emailEl.val());
+    const password = $.trim(passwordEl.val());
+    const username = $.trim(usernameEl.val());
 
     try {
         const response = await fetch("/api/users", {
@@ -152,11 +146,11 @@ const signUpHandler = async(event) =>{
             headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {
-            document.location.replace("/dashboard");
+            document.location.replace("/");
             
         } else {
             alert("Username already taken. Please use another one.");
-            usernameEl.val() ="";
+            usernameEl.val("");
             usernameEl.focus();
         }
     } catch (error) {

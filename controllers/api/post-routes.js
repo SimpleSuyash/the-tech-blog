@@ -31,14 +31,16 @@ router.get("/:id", withAuth, async (req, res) => {
                 attributes:["username"]
             }]
         });
-        // will use the spread operator to get all postData's properties
-        //that's why not using map function
-        const posts= dbPostData.get({ plain: true });
+        
+        const post= dbPostData.get({ plain: true });
         const comments = dbCommentData.map(comment => comment.get({plain: true}));
-        posts.comments = comments;
+        post.comments = comments;
         res.render("post-detail", {
-            //using spread operator
-            ...posts,
+            //not using spread operator
+            //some partials cannot be reused
+            // because the data is not in same slevel
+            // ...post,
+            post,
             pageTitle: "Post",
             loggedIn: req.session.loggedIn,
             user: req.session.user
