@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+
+
 // -------------------------------------Sign Up
 router.post("/", async (req, res) => {
   let dbUserData;

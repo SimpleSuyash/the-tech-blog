@@ -18,7 +18,7 @@ router.get("/", async (req, res)=>{
             posts,
             pageTitle: "Home",
             loggedIn: req.session.loggedIn,
-            user: req.session.user
+            loggedInUser: req.session.user
         });
     } catch (error) {
         console.log(error);
@@ -26,40 +26,40 @@ router.get("/", async (req, res)=>{
     }
 }); 
 
-/*
+
 
 // Use withAuth middleware to prevent access to route
 router.get("/dashboard", withAuth, async (req, res) => {
     try {
       // Find the logged in user based on the session ID
-        const userData = await User.findByPk(req.session.userId, {
+        const dbUserData = await User.findByPk(req.session.userId, {
             attributes: { exclude: ["password"] },
             include: [{ model: Post }],
         });
   
-      const user = userData.get({ plain: true });
+      const user = dbUserData.get({ plain: true });
   
         res.render("dashboard", {
             ...user,
+            // user,
             loggedIn: true,
-            title: "Dashboard"
+            pageTitle: "Dashboard",
+            loggedInUser: req.session.user
         });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
     }
 });
-*/
+
 router.get("/login", (req, res)=>{
-    // If the user is already logged in, redirect to the dashboard
+    // If the user is already logged in, redirect to the homepage
     if (req.session.loggedIn) {
-        res.redirect("/dashboard");
+        res.redirect("/");
         return;
     }
     // Otherwise, render the 'login' template
-    res.render("login",{
-        title: "Login",
-    });
+    res.render("login");
 });
 
 module.exports = router;

@@ -1,16 +1,19 @@
-const logoutEl = $("#logout");
 
-const logoutHandler = async () => {
-  const response = await fetch("/api/users/logout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  });
+$(document).ready(()=>{
+  const logoutEl = $("#logout");
 
-  if (response.ok) {
-    document.location.replace("/");
-  } else {
-    alert("Failed to log out.");
-  }
-};
+  const logoutHandler = async () => {
+    const response = await fetch("/api/users/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
 
-logoutEl.on("click", logoutHandler);
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
+      alert("Failed to log out.");
+    }
+  };
+
+  logoutEl.on("click", logoutHandler);
+});

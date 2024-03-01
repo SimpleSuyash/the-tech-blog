@@ -45,7 +45,7 @@ const postData = [
         
         <p>The Nvidia RTX 4070 Super is a decent card at an affordable price. It's available on Jan. 17, and it's my Product of the Week.</p>`,
         post_date: "2024-02-17",
-        creater_id: 3
+        creater_id: 1
     }
 ];
 const seedPosts = () => Post.bulkCreate(postData,{
