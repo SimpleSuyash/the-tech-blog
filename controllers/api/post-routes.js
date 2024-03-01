@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Post, Comment, User } = require("../../models");
 // Import the custom middleware
 const withAuth = require("../../utils/auth");
+const dayjs = require("dayjs");
 
 // route to get one post/article
 router.get("/:id", withAuth, async (req, res) => {
@@ -36,19 +37,76 @@ router.get("/:id", withAuth, async (req, res) => {
         const comments = dbCommentData.map(comment => comment.get({plain: true}));
         post.comments = comments;
         res.render("post-detail", {
-            //not using spread operator
-            //some partials cannot be reused
-            // because the data is not in same slevel
-            // ...post,
-            post,
+            //using spread operator
+            ...post,
+            // post,
             pageTitle: "Post",
             loggedIn: req.session.loggedIn,
-            user: req.session.user
+            loggedInUser: req.session.user
         });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
     };     
+});
+
+
+
+
+
+// route to create a new post 
+router.post('/', withAuth, async (req, res) => {
+    try {
+        const newPost = await Post.create({
+            ...req.body,
+            creater_id: req.session.userId,
+        });
+        res.status(200).json(newPost);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+//route to update a post 
+router.put("/:id", withAuth, async (req, res) => {
+    const {title , content} =  req.body;
+    const last_update_date = dayjs().format("YYYY-MM-DD");
+    try{
+        const dbUpdatedPost = await Post.update({
+            title, 
+            content, 
+            last_update_date
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json(dbUpdatedPost);
+    }catch(error){
+        console.log(error);
+        res.status(500).json(error)
+    }
+});
+
+//route to delete a post 
+router.delete("/:id", withAuth, async(req, res)=>{
+    try {
+        const dbPostData = await Post.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id,
+            },
+        });
+        if (!dbPostData) {
+            res.status(404).json({ message: 'No post found with this id!' });
+            return;
+        }
+          res.status(200).json(dbPostData);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
 });
 
 module.exports = router;

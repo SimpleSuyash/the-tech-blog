@@ -53,77 +53,42 @@
     </div>
     <!-- {{!-- end of navbar --}} -->
     <!-- Start of the content -->
-    <div class="home md:grid md:grid-cols-auto-fill md: gap-4 mt-5 mb-24">
-        <div class="card card-compact  bg-neutral shadow-xl hover:opacity-90">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
-            </figure>
-            <div class="card-body">
-                <div class="flex justify-between">
-                    <h2 class="card-title">{Article1!}</h2>
-                    <span class="badge">Posted by {Suyash} on {2024/02/22}</span>
-                </div>
-                <div>
-                    <p>{If a dog chews shoes whose shoes does he choose?}</p>
-                </div>
-                
-                <div class="card-actions justify-end">
-                    <button class="btn btn-accent text-accent-content " data-id="">Read Full Article</button>
-                </div>
+    
+    <div class="hero bg-base-200 shadow-xl hover:opacity-70 rounded-md">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
+                class="max-w-16 rounded-lg shadow-2xl" />
+            <div>
+                <h2 class=" font-bold text-accent">{{ username}}</h2>
+                {{>post-info}}
             </div>
         </div>
-        <div class="card card-compact  bg-neutral shadow-xl hover:opacity-90">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
-            </figure>
-            <div class="card-body">
-                <div class="flex justify-between">
-                    <h2 class="card-title">{Article1!}</h2>
-                    <span class="badge">Posted by {Suyash} on {2024/02/22}</span>
+    </div>
+    {{#if posts}}
+        <h2> Your Posts</h2>
+        {{#each posts as |post|}}
+            <div class="collapse collapse-arrow bg-base-200">
+                <input type="radio" name="my-accordion-2" checked="checked" />
+                <div class="collapse-title text-xl font-medium">
+                    {{title}}
                 </div>
-                <div>
-                    <p>{If a dog chews shoes whose shoes does he choose?}</p>
-                </div>
-                
-                <div class="card-actions justify-end">
-                    <button class="btn btn-accent text-accent-content " data-id="">Read Full Article</button>
-                </div>
-            </div>
-        </div>
-        <div class="card card-compact  bg-neutral shadow-xl hover:opacity-90">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
-            </figure>
-            <div class="card-body">
-                <div class="flex justify-between">
-                    <h2 class="card-title">{Article1!}</h2>
-                    <span class="badge">Posted by {Suyash} on {2024/02/22}</span>
-                </div>
-                <div>
-                    <p>{If a dog chews shoes whose shoes does he choose?}</p>
-                </div>
-                
-                <div class="card-actions justify-end">
-                    <button class="btn btn-accent text-accent-content " data-id="">Read Full Article</button>
+                <div class="collapse-content">
+                    <div>Created On: {{post_date}}</div>
+                    {{#if last_update_date}}
+                        Last Updated On: {{last_update_date}}
+                    {{/if}}
+                    <p class="line-clamp-3 prose prose-stone md:prose-lg lg:prose-xl my-8">{{content}}</p>
                 </div>
             </div>
-        </div>
-        <div class="card card-compact  bg-neutral shadow-xl hover:opacity-90">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
-            </figure>
-            <div class="card-body">
-                <div class="flex justify-between">
-                    <h2 class="card-title">{Article1!}</h2>
-                    <span class="badge">Posted by {Suyash} on {2024/02/22}</span>
-                </div>
-                <div>
-                    <p>{If a dog chews shoes whose shoes does he choose?}</p>
-                </div>
-                
-                <div class="card-actions justify-end">
-                    <button class="btn btn-accent text-accent-content " data-id="">Read Full Article</button>
-                </div>
-            </div>
-        </div>
-        
-        
+            <button class="btn btn-warning text-accent-content update" data-id={{ id }}>Update Post</button>
+            <button class="btn btn-error text-accent-content delete" data-id={{ id }}>Delete Post</button>
+        {{/each}}
+
+    {{else}}
+        <h2> You currently don't have any articles posted!</h2>
+    {{/if}}
+    <div>
+        <button class="btn btn-accent text-accent-content new" data-id={{ id }}>Create New Post</button>
     </div>
     <!-- end of content  -->
     <footer class="fixed right-0 bottom-0 p-6 text-sm text-center md:text-right fade-in bg-slate-50 w-full">

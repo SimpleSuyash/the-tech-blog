@@ -1,20 +1,41 @@
 
-<div class="">
-    <h2>Welcome, {{name}}!</h2>
-</div>
-<hr>
-<h3 clas="text-center">Your Post</h3>
-<main class="home md:grid md:grid-cols-auto-fill md: gap-4 mb-24">
+{{>user-profile}}
+<div id="post-container">
+
     {{#if posts.length}}
-        {{#each posts as |post|}}
-            {{> user-post-cards}}
-        {{/each}}
+
+    <h2 class="text-accent text-xl my-10"> Your Posts</h2>
+
+    {{#each posts as |post|}}
+        <div class="collapse collapse-arrow shadow-xl pb-5">
+            <input type="radio" name="my-accordion-2" checked="checked" />
+            <div class="collapse-title text-xl font-medium">
+                {{title}}
+            </div>
+            <div class="collapse-content">
+                <div>Created On: {{post_date}}</div>
+                {{#if last_update_date}}
+                    Last Updated On: {{last_update_date}}
+                {{/if}}
+                <div class="line-clamp-3 my-8">{{{content}}}</div>
+            </div>
+            <div class="flex justify-start gap-5">
+                <button class="btn btn-warning text-accent-content update" data-id={{ id }}>Update Post</button>
+                <button class="btn btn-error text-accent-content delete" data-id={{ id }}>Delete Post</button>
+            </div>
+            
+        </div>
+    {{/each}}
+
+    {{else}}
+        <h2 class="text-accent text-xl my-10"> You currently don't have any articles posted!</h2>
     {{/if}}
+</div>
 
-</main>
+    
+    <div class="flex justify-center mb-14">
+        <button class="btn btn-accent text-accent-content create my-8" data-id={{ id }}>Create New Post</button>
+    </div>
+        
 
-
-<button type="button" class="btn btn-accent"> Create New Post</button>
-
-
-<script src="./scripts/dashboard.js"></script>0
+<script src="/scripts/dashboard.js" type="application/javascript"></script>
