@@ -1,16 +1,18 @@
 
-$(document).ready(() => {
+$(window).ready(() => {
     const titleEl = $("#title");
     const postTxtArea = $("#post");
     const updateBtn = $("#update");
     const cancelBtn = $("#cancel");
 
+    //when enter key is pressed in title
     const enterKeyHandler = event =>{
         if(event.key === "Enter"){
             event.preventDefault();
         }
     };
 
+    //when text in title is changed
     const titleChangeHandler = event =>{
 
         if($.trim(titleEl.text())===""){
@@ -20,43 +22,49 @@ $(document).ready(() => {
         }
     };
 
+    
+    // when value in textbox for post content is changed 
     const postChangeHandler = event =>{
         
         if( $.trim(postTxtArea.val())==="" ){
             updateBtn.attr("disabled", true);
         }else{
             updateBtn.removeAttr("disabled");
-            if(event.key === "Enter"){
-                updateHandler();
-            }
+        }
+        //disabling the enter key, so users can type more paragraphs
+        if(event.key === "Enter"){
+            updateHandler();
         }
     };
 
+
+    // when update button is pressed
     const updateHandler = async(event) =>{
         const id = $(event.target).data("id");
+        try {
+            const response = await fetch(`/api/posts/${id}`,{
+                method: "PUT",
+                body: JSON.stringify({
+                    title: $.trim(titleEl.text()),
+                    content: $.trim(postTxtArea.val())
+                }),
+                headers: {"Content-Type": "application/json"}
+            });
+    
+            if(response.ok){
+                window.location.replace("/dashboard");
+            }else{
+                alert('Failed to update post!');
+            }
+        } catch (error) {
+            console.log(error);
 
-        
-       
-        const response = await fetch(`/api/posts/${id}`,{
-            method: "PUT",
-            body: JSON.stringify({
-                title: $.trim(titleEl.text()),
-                content: $.trim(postTxtArea.val())
-            }),
-            headers: {"Content-Type": "application/json"}
-        });
-
-        if(response.ok){
-            document.location.replace("/dashboard");
-        }else{
-            alert('Failed to update post!');
         }
-  
-
     };
 
+    //when cancel button is pressed
     const cancelHandler = event =>{
-        document.location.replace("/dashboard");
+        window.location.replace("/dashboard");
     };
  
 

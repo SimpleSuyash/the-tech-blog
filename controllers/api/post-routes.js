@@ -4,9 +4,8 @@ const { Post, Comment, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 const dayjs = require("dayjs");
 
-// route to get one post/article
+// route to get one post/article with given post id for post detail page
 router.get("/:id", withAuth, async (req, res) => {
-    // router.get("/:id",  async (req, res) => {
     const id = req.params.id;
     try{ 
         if(!req.session.loggedIn){
@@ -51,19 +50,17 @@ router.get("/:id", withAuth, async (req, res) => {
 });
 
 
-
-
-
 // route to create a new post 
 router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
-            creater_id: req.session.userId,
+            creater_id: req.session.userId
         });
         res.status(200).json(newPost);
-    } catch (err) {
-        res.status(400).json(err);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
     }
 });
 
@@ -95,11 +92,11 @@ router.delete("/:id", withAuth, async(req, res)=>{
         const dbPostData = await Post.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
+                creater_id: req.session.userId
             },
         });
         if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id!' });
+            res.status(404).json({ message: "No post found with this id!" });
             return;
         }
           res.status(200).json(dbPostData);

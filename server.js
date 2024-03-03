@@ -34,7 +34,7 @@ const sess = {
     // secure: true,
     httpOnly: true,
     sameSite: "strict",
-    maxAge: 300000
+    maxAge: 1000*60*60//expire in an hour of idle
   } 
 };
 app.use(session(sess));

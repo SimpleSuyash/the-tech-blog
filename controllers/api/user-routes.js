@@ -1,6 +1,40 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+// Import the custom middleware
+const withAuth = require("../../utils/auth")
 
+
+// route to get the user with a given id
+router.get("/:id", withAuth, async (req, res) => {
+  const id = req.params.id;
+  try{ 
+    if(!req.session.loggedIn){
+      res.redirect("/login");
+        return;
+    }
+
+    const dbUserData = await User.findByPk(id,{
+      attributes:{
+        include:["username", "email"]
+      }
+    });
+
+    if (!dbUserData) {
+      res.status(400).json({ message: "No user exists." });
+      return;
+    }
+    const user= dbUserData.get({ plain: true });
+    res.render("new-post", {
+        ...user,
+        pageTitle: "New Post",
+        loggedIn: req.session.loggedIn,
+        loggedInUser: req.session.user,
+    });
+  } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+  }     
+});
 
 
 // -------------------------------------Sign Up
@@ -29,9 +63,9 @@ router.post("/", async (req, res) => {
       req.session.user = dbUserData.username;
       res.status(200).json({ user: dbUserData, message: "Welcome to Tech Blog!" });
     });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
 
@@ -68,9 +102,9 @@ router.post("/login", async (req, res) => {
       req.session.user = dbUserData.username;
       res.status(200).json({ user: dbUserData, message: "You are now logged in!" });
     });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
 

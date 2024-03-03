@@ -27,10 +27,13 @@ router.get("/", async (req, res)=>{
 }); 
 
 
-
 // Use withAuth middleware to prevent access to route
 router.get("/dashboard", withAuth, async (req, res) => {
     try {
+        if(!req.session.loggedIn){
+            res.redirect("/login");
+            return;
+        }
       // Find the logged in user based on the session ID
         const dbUserData = await User.findByPk(req.session.userId, {
             attributes: { exclude: ["password"] },
