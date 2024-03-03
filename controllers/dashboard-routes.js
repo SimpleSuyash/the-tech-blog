@@ -1,16 +1,13 @@
 const router = require("express").Router();
 const { Post, Comment, User, Dashboard } = require("../models");
-// Import the custom middleware
-const withAuth = require("../utils/auth");
-// route to get one post/article
-router.get("/dashboard/:id", withAuth, async (req, res) => {
-    // router.get("/:id",  async (req, res) => {
+
+// route to get one post/article by given post id
+//populates the post data and displays in the form
+//for user to edit it
+router.get("/dashboard/:id",  async (req, res) => {
     const id = req.params.id;
     try{ 
-        if(!req.session.loggedIn){
-            res.redirect("/login");
-            return;
-        }
+
         const dbPostData = await Post.findByPk(id,{
             include:[{
                 model: User,
@@ -34,4 +31,5 @@ router.get("/dashboard/:id", withAuth, async (req, res) => {
         res.status(500).json(error);
     };     
 });
+
 module.exports = router;

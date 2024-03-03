@@ -1,4 +1,4 @@
-$(document).ready(()=>{
+$(window).ready(()=>{
 
     const postBtn = $("#post");
     const commentTxtArea = $("#comment");
@@ -21,7 +21,7 @@ $(document).ready(()=>{
                 headers: {"Content-Type": "application/json"}
             });
             if (response.ok) {
-                document.location.reload();
+                window.location.reload();
             } else {
                 alert('Failed to create the comment!');
             }
@@ -31,6 +31,8 @@ $(document).ready(()=>{
     };
 
 
+    //when comment is not empty, enable post button
+    //when enter key is pressed, create comment 
 
     const textChangeHandler = event =>{
         if($.trim(commentTxtArea.val())!==""){

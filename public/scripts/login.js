@@ -1,4 +1,4 @@
-$(document).ready(()=>{
+$(window).ready(()=>{
     const continueBtn = $(".continue");
     const cancelBtn = $(".cancel");
     const signInBtn = $(".signIn");
@@ -24,20 +24,11 @@ $(document).ready(()=>{
         const regex =/^[a-zA-Z0-9]{1,35}$/;
         return regex.test(input);
     };
-    const getPostIdFromStorage =()=>{
-        return localStorage.getItem("postId");
-    };
-    const postId = getPostIdFromStorage();
-
-    const getDashboardFlagFromStorage =()=>{
-        return localStorage.getItem("toOpenDashboard");
-    };
-    const toOpenDashboard = getDashboardFlagFromStorage();
-
-
+    
+    
     const cancelHandler = async(event) =>{
         // event.preventDefault();
-        document.location.replace('/');
+        window.location.replace('/');
     };
     //continue button is enabled when email value is valid
     //unless it is disabled
@@ -122,10 +113,10 @@ $(document).ready(()=>{
 
     //handles sign in click event
     const signInHandler = async(event) =>{
-
+        const page = JSON.parse(localStorage.getItem("page"));
         const email = $.trim(emailEl.val());
         const password = $.trim(passwordEl.val());
-    
+        
         try {
             const response = await fetch("/api/users/login", {
                 method: "POST",
@@ -133,21 +124,20 @@ $(document).ready(()=>{
                 headers: { "Content-Type": "application/json" },
             });
             if (response.ok) {
-                //check if to load post detail page
-                if(postId){
-                    document.location.replace(`/api/posts/${postId}`);
-                    localStorage.clear();
-                    return;
-                }
                 //check if to load dashboard page
-                if(toOpenDashboard){
-                    document.location.replace(`/dashboard/`);
-                    localStorage.clear();
-                    return;
+
+                if(page === "dashboard"){
+                    window.location.replace("/dashboard");
+                }else if(page === "home"){
+                    //when user pressed login from home page
+                    //simply redirect the user back to home page
+                    window.location.replace("/");
                 }
-                //when user pressed login from home page
-                //simply redirect the user back to home page
-                document.location.replace("/");
+                //check if to load post detail page
+                else{
+                    window.location.replace(`/api/posts/${page}`);
+                }
+                localStorage.clear();
             } else {
                 alert("Failed to log in.");
             }
@@ -158,7 +148,7 @@ $(document).ready(()=>{
 
     //handles sign up click event
     const signUpHandler = async(event) =>{
-
+        const page = JSON.parse(localStorage.getItem("page"));
         const email = $.trim(emailEl.val());
         const password = $.trim(passwordEl.val());
         const username = $.trim(usernameEl.val());
@@ -170,21 +160,18 @@ $(document).ready(()=>{
                 headers: { "Content-Type": "application/json" },
             });
             if (response.ok) {
+                if(page === "dashboard"){
+                    window.location.replace(`/dashboard/`);
+                }else if(page === "home"){
+                    //when user pressed login from home page
+                    //simply redirect the user back to home page
+                    window.location.replace("/");
+                }
                 //check if to load post detail page
-                if(postId){
-                    document.location.replace(`/api/posts/${postId}`);
-                    localStorage.clear();
-                    return;
+                else{
+                    window.location.replace(`/api/posts/${page}`);
                 }
-                //check if to load dashboard page
-                if(toOpenDashboard){
-                    document.location.replace(`/dashboard/`);
-                    localStorage.clear();
-                    return;
-                }
-                //when user pressed login from home page
-                //simply redirect the user back to home page
-                document.location.replace("/");
+                localStorage.clear();
                 
             } else {
                 alert("Username already taken. Please use another one.");

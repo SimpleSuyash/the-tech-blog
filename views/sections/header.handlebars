@@ -1,9 +1,9 @@
 <header class="navbar bg-neutral text-accent rounded-xl font-heading">
     <div class="navbar-start">
-        <a class="text-2xl font-semibold" href="/">Home</a>
+        <a class="text-2xl font-semibold hover:opacity-70 rounded-md" href="/">Home</a>
     </div>
     <div class="navbar-center">
-        <div class="btn btn-ghost text-3xl shadow-xl truncate duration-1000 absolute sliding-anim font-bold font-heading cursor-default ">
+        <div class="btn btn-ghost text-3xl shadow-xl truncate duration-1000 relative sliding-anim font-bold font-heading cursor-default ">
             <span></span>
             <span></span>
             <span></span>
@@ -38,15 +38,16 @@
                 {{#if loggedIn}}
                     <li><button class="btn-ghost" id="logout">Logout</button></li>
                 {{else}}
-                    <li><a href="/login">Login</a></li>
+                    {{!-- <li><a href="/login">Login</a></li> --}}
+                    <li><button class="btn-ghost" id="login">Login</button></li>
                 {{/if}}
                 
             </ul>
         </div>
      </div>
 </header>
-    <script src ="/scripts/navigation.js" type="application/javascript"></script>
+    <script src ="/scripts/headerNavigation.js" type="application/javascript"></script>
  {{!-- if the user is logged in, load the logout script when they logout  --}}
     {{#if loggedIn}}
-        <script src ="/scripts/logout.js" type="application/javascript"></script>
+        {{!-- <script src ="/scripts/logout.js" type="application/javascript"></script> --}}
     {{/if}}
