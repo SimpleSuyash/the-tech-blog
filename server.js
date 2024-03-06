@@ -11,7 +11,7 @@ const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({
   defaultLayout: "main",
   layoutsDir: path.join(__dirname, "views/templates"),

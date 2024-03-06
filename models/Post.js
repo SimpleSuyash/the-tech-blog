@@ -58,7 +58,6 @@ Post.init(
                 newPostData.title = await titleize(newPostData.title);
                 return newPostData;
             },
-            // Here, we use the beforeUpdate hook to make all of the characters lower case in an updated email address, before updating the database.
             beforeUpdate: async (updatedPostData) => {
                 updatedPostData.title = await titleize(updatedPostData.title);
                 return updatedPostData;

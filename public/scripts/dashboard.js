@@ -15,11 +15,15 @@ $(window).ready(() => {
                 });
 
                 if (response.ok) {
-                    window.location.replace("/dashboard");
+                    alert('Your post has been deleted!');
+                    window.location.reload();
                 } else {
                     alert("Failed to delete post");
                 }
                 //---------------------------------update link handler
+                //it just opens a new page and fetches existing data in the form
+                //so that user can edit them
+                // that actual update  doesn't happen here
             }else if ($(event.target).hasClass("update")){
                 const response = await fetch(`/dashboard/${id}`, {
                     method: "GET",
