@@ -2,6 +2,7 @@ $(window).ready(()=>{
     const createBtn = $("#create");
     const titleInput = $("#title");
     const postTxtArea = $("#post");
+    const cancelBtn = $("#cancel");
 
     //when title input value changed
     //create button is enabled only when both title and content are not empty
@@ -19,10 +20,6 @@ $(window).ready(()=>{
             createBtn.attr("disabled", true);
         }else{
             createBtn.removeAttr("disabled");
-        }
-        //disabling the enter key, so users can type more paragraphs
-        if(event.key === "Enter"){
-            createHandler();
         }
     };
 
@@ -50,8 +47,12 @@ $(window).ready(()=>{
 
     };
 
-
+    //when cancel button is pressed
+    const cancelHandler = () => {
+        window.location.replace('/dashboard');
+    };
     titleInput.on("keyup", titleChangeHandler);
     postTxtArea.on("keyup", postChangeHandler);
     createBtn.on("click", createHandler);
+    cancelBtn.on("click", cancelHandler);
 });

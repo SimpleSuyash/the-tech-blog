@@ -52,7 +52,7 @@ User.init(
         }
     },
     {
-        // When adding hooks via the init() method, they go below
+        // adding hooks 
         hooks: {
             // Use the beforeCreate hook to work with data before a new instance is created
             beforeCreate: async (newUserData) => {
@@ -65,19 +65,6 @@ User.init(
 
                 return newUserData;
             }
-            /*,
-            beforeUpdate: async (updatedUserData) => {
-                console.log("tryingII");
-                //username first letter capitalizing
-                updatedUserData.username = await capitalize(updatedUserData.username);
-                // In this case, we are taking the user's email address, and making all letters lower case before adding it to the database.
-                updatedUserData.email = await updatedUserData.email.toLowerCase();
-                //storing password in hashed format
-                updatedUserData.password = await bcrypt.hash(updatedUserData.password, saltRounds);
-
-                return newUserData;
-            },
-            */
         },
         sequelize,
         timestamps: false,
