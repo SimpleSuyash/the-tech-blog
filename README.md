@@ -7,13 +7,13 @@
 <a href= "http://www.wtfpl.net/about/"><img src = "https://img.shields.io/badge/License-WTFPL-brightgreen.svg"></a>
 </div>
 
-# Ecommerce ORM   
+# The Tech Blog 
 
 This app is a full-stack application that uses all three `MVC` components.
 
 ##  Description
 
-This app is a `CMS-style` blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. It follows the `MVC` paradigm in its architectural structure, using `Handlebars.js` as the templating language, `Sequelize` as the ORM, and the `express-session` npm package for authentication.
+This app is a `CMS-style` blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. It follows the `MVC` paradigm in its architectural structure, using `Handlebars.js` as the templating language, `Sequelize` as the ORM, `MySQL` as the database, and the `express-session` npm package for authentication.
 
 ## Table of Contents
 
@@ -90,7 +90,7 @@ This app is a `CMS-style` blog site similar to a Wordpress site, where developer
 
 ## Usage
 
-To use this project,
+To use this project locally,
 - Get a copy of this repo to your local machine.
 - Install the `Node Module`
     ```
@@ -113,9 +113,6 @@ To use this project,
     ```
     npm run start
     ```
-- Open the `Postman` to test the various API endpoints.    
-
-
 
 ## Licence
 
@@ -143,11 +140,9 @@ Create New Post Page
 
 ## Issue
 This app has still some bugs.
-1. The login/signup page doesn't have a proper title. That is something needed to be looked at when I have more time in the future.
 1. The navigation links are functioning properly. However, the back button doesn't work as expected. I need to learn more about `location.replace` etc and fix this.
 1. The pictures are only place holders. They are not dynamic. So, user file upload function is still lacking in this app.
-1. The new data is not rendered correctly as the seeds data. 
+1. Some new data is not rendered correctly as the seeds data. 
 
 ## Deployed Website Link
-[]()
-
+[App in Heroku](https://simplesuyash-tech-blog-97da35edb183.herokuapp.com/)

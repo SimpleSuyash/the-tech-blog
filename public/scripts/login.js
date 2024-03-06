@@ -11,6 +11,9 @@ $(window).ready(()=>{
 
     const passwordContainer = $(".pw");
     const usernameContainer = $(".user");
+    const titleEl =$("title");
+
+    titleEl.text("Tech Blog | Login/SignUp|");
 
     const validateEmail = input=>{
         const regex =/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
