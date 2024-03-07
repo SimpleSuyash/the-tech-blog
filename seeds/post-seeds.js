@@ -2,6 +2,7 @@ const {Post} = require("../models");
 
 const postData = [
     {
+        id:1,
         title: "Are Deepfakes Overblown?",
         content: `<p>I've worked in and out of security for decades. We did the same kinds of things people do with deepfakes with far older technology when I was working on the switchboard at my friend's motel when I was a kid. Back then, all we had were hard-wired phones, but we'd often mess with people late at night by pretending to be people we weren't.</p>
 
@@ -18,9 +19,10 @@ const postData = [
         
         <p>There are a lot of industry rules and practices that have been developed over centuries to protect these institutions. One is called “separation of duties,” where no one person can authorize a significant payment without a physical executive sign-off. When you're talking about millions of dollars, the expenditure might require the CFO, the CEO, and an independent board member to sign off on it.</p>`,
         post_date: "2024-02-05",
-        creater_id: 2
+        creater_id: 1
     },
     {
+        id:2,
         title: "Apple’s Vision Pro: The Slow Birth of Spatial Computing",
         content: `<p>The Apple Vision Pro has started to ship, and reviewers are providing a range of opinions on this first-generation product. Like most first-gen hardware, the offering is strong on technology but still weak on applications, but both will change as it evolves and more developers start building for it.</p>
 
@@ -34,6 +36,7 @@ const postData = [
         creater_id: 4
     },
     {
+        id:3,
         title: "Review: Nvidia RTX 4070 Super",
         content: `<p>Much of AI development work is still done on GPUs. Last week, Nvidia announced one of its strongest GPU values, the RTX 4070 Super.</p>
 
@@ -45,7 +48,7 @@ const postData = [
         
         <p>The Nvidia RTX 4070 Super is a decent card at an affordable price. It's available on Jan. 17, and it's my Product of the Week.</p>`,
         post_date: "2024-02-17",
-        creater_id: 2
+        creater_id: 1
     }
 ];
 const seedPosts = () => Post.bulkCreate(postData,{
