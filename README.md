@@ -143,8 +143,6 @@ This app has still some bugs.
 1. The navigation links are functioning properly. However, the back button doesn't work as expected. I need to learn more about `location.replace` etc and fix this.
 1. The pictures are only place holders. They are not dynamic. So, user file upload function is still lacking in this app.
 1. Some new data is not rendered correctly as the seeds data. 
-1. Last but not least, my database data integrity is lacking. What I mean is, when Sequelize ORM produces data in MySQL, the users and posts data are produced in random order, thus ultimately affecting the association between user, post and comment. 
-![Disparity between seeds file and database](./assets/images/user-seeds.png) 
 
 ## Deployed Website Link
 [App in Heroku](https://simplesuyash-tech-blog-97da35edb183.herokuapp.com/)
