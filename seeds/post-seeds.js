@@ -18,7 +18,7 @@ const postData = [
         
         <p>There are a lot of industry rules and practices that have been developed over centuries to protect these institutions. One is called “separation of duties,” where no one person can authorize a significant payment without a physical executive sign-off. When you're talking about millions of dollars, the expenditure might require the CFO, the CEO, and an independent board member to sign off on it.</p>`,
         post_date: "2024-02-05",
-        creater_id: 1
+        creater_id: 2
     },
     {
         title: "Apple’s Vision Pro: The Slow Birth of Spatial Computing",
@@ -45,7 +45,7 @@ const postData = [
         
         <p>The Nvidia RTX 4070 Super is a decent card at an affordable price. It's available on Jan. 17, and it's my Product of the Week.</p>`,
         post_date: "2024-02-17",
-        creater_id: 1
+        creater_id: 2
     }
 ];
 const seedPosts = () => Post.bulkCreate(postData,{
