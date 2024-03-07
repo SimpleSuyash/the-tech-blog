@@ -3012,6 +3012,10 @@ details.collapse summary::-webkit-details-marker {
   display: flex;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .hidden {
   display: none;
 }
@@ -4020,6 +4024,18 @@ body{
 .focus\:placeholder\:text-purple-500:focus::placeholder {
   --tw-text-opacity: 1;
   color: rgb(168 85 247 / var(--tw-text-opacity));
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+.disabled\:opacity-100:disabled {
+  opacity: 1;
+}
+
+.disabled\:opacity-10:disabled {
+  opacity: 0.1;
 }
 
 .peer:invalid ~ .peer-invalid\:visible {
